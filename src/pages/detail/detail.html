@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ peripheral.name || 'Device' }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="padding">
+  <!-- 
+  <ion-card>
+    <ion-card-header>
+      {{ peripheral.name || 'Unnamed' }}
+    </ion-card-header>
+    <ion-card-content>
+      {{ peripheral.id }}
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- <ion-card>
+    <ion-card-header>
+      Services
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item *ngFor="let service of peripheral.services">
+        {{service}}
+      </ion-item>
+    </ion-list>
+  </ion-card> -->
+  <ion-card *ngFor="let c of peripheral.characteristics">
+    <ion-card-header>
+      {{c.characteristic}}
+    </ion-card-header>
+    <ion-card-content>
+      <span *ngFor="let prop of c.properties; let i = index;">
+          <button ion-button clear *ngIf="prop=='Read'" (click)="readChar(c)">{{prop}}</button>
+          <button ion-button color="secondary" clear *ngIf="prop=='Write'" (click)="writeChar(c)">{{prop}}</button>
+      </span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p>{{ statusMessage }}</p>
+  </ion-toolbar>
+</ion-footer>
